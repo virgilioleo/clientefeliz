@@ -27,6 +27,8 @@ Route::get('/','WelcomeController@index');
 
 Route::get('/clientes','ClienteController@index');
 
+Route::get('/login','LoginController@index');
+
 Route::get('/clientes/buscar','ClienteController@buscar');
 
 Route::post('/clientes','ClienteController@store');
