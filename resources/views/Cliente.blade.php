@@ -4,124 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        .modal-header,
-        h4,
-        .close {
-            background-color: #5cb85c;
-            color: white !important;
-            text-align: center;
-            font-size: 30px;
-        }
-
-        .modal-footer {
-            background-color: #f9f9f9;
-        }
-    </style>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 </head>
 
 <body>
-
-    <div class="container">
-        <h2>Cliente Feliz</h2>
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-default btn-lg" id="myBtn">Entrar</button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header" style="padding:35px 50px;">
-                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                        <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
-                    </div>
-                    <div class="modal-body" style="padding:40px 50px;">
-                        <form action="/clientes" method="get">
-                            @csrf
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Email</label>
-                                <input type="text" class="form-control" id="usrname" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
-                                    Senha</label>
-                                <input type="text" class="form-control" id="psw" placeholder="">
-                            </div>
-                            <!--
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="" checked>Remember me</label>
-                            </div>
-                            -->
-                            <button type="submit" class="btn btn-success btn-block"><span
-                                    class="glyphicon glyphicon-off"></span> Login</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span
-                                class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                        <p>Não tem conta? <a data-toggle="modal" href="#myModal2">Cadastre-se</a></p>
-                        <p><a href="#">Esqueceu a Senha?</a></p>
-                    </div>
+    <nav class="navbar" style="background-color: #17a2b8;">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Clientes</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                    </ul>
+                    <a href="{{ route('clientes.pdf') }}" class="btn btn-secondary" style="margin-right: 10px;">
+                        Exportar PDF
+                    </a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Novo Cliente
+                    </button>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="myModal2">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Cadastro</h4>
-                    </div>
-                    <div class="container"></div>
-                    <div class="modal-body" style="padding:40px 50px;">
-                        <form action="/clientes" method="get">
-                            @csrf
-                            <div class="form-group">
-                                <label for="fname"><span class="glyphicon glyphicon-user"></span> Nome</label>
-                                <input type="text" class="form-control" id="fname" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="lname"><span class="glyphicon glyphicon-user"></span> Sobrenome</label>
-                                <input type="text" class="form-control" id="lname" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="username"><span class="glyphicon glyphicon-user"></span> Usuário</label>
-                                <input type="text" class="form-control" id="username" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
-                                    Senha</label>
-                                <input type="text" class="form-control" id="psw" placeholder="">
-                            </div>
-                            <button type="submit" class="btn btn-success btn-block"></span> Salvar</button>
-                        </form>
-                    </div>
+        </nav>
+    </nav>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/clientes" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" placeholder="name" name="nome">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com"
+                                name="email">
+                        </div>
+                        <input type="submit" value="Submit">
+                    </form>
+
                 </div>
                 <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn btn-danger">Fechar</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar Alterações</button>
                 </div>
             </div>
         </div>
     </div>
 
-    </div>
+    <table id="table-clientes" class="display">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Idade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>João</td>
+                <td>joao@example.com</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Maria</td>
+                <td>maria@example.com</td>
+                <td>25</td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
 
     <script>
         $(document).ready(function() {
-            $("#myBtn").click(function() {
-                $("#myModal").modal();
-            });
+            $('#table-clientes').DataTable();
         });
     </script>
-    <script>
+    <!--<script>
         /*
-                 INCLUSAO, ALTERACAO
-                */
+                                                 INCLUSAO, ALTERACAO
+                                                */
         var modoCadastro;
 
         $('#btnjquery').click(function() {
@@ -168,8 +147,10 @@
         });
 
         //
-    </script>
+    </script>-->
 
 </body>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 </html>
