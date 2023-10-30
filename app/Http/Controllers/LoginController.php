@@ -10,18 +10,11 @@ class LoginController extends Controller
 {
     public function index() 
     {
-        // $clienteservice = new ClienteService;
-        // $clientes = $clienteservice->buscarClientes();
         $clientes = cliente::all()->toArray();
         return view('login',compact('clientes'));
     }
     public function store(Request $request)
     {
-        // $nome = $request->nome;
-        // $email = $request->email;
-        // print_r($nome);
-        // echo "<br>";
-        // print_r($email);
         Cliente::create([
             'nome'  => $request->nome,
             'email' => $request->email

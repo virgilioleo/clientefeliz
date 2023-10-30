@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar" style="background-color: #17a2b8;">
+    <nav class="navbar" style="background-color: #fff;">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Clientes</a>
@@ -74,21 +74,17 @@
             <tr>
                 <th>Nome</th>
                 <th>Email</th>
-                <th>Idade</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>João</td>
                 <td>joao@example.com</td>
-                <td>30</td>
             </tr>
             <tr>
                 <td>Maria</td>
                 <td>maria@example.com</td>
-                <td>25</td>
             </tr>
-            <!-- Adicione mais linhas conforme necessário -->
         </tbody>
     </table>
 
@@ -97,10 +93,11 @@
             $('#table-clientes').DataTable();
         });
     </script>
+    
     <!--<script>
         /*
-                                                 INCLUSAO, ALTERACAO
-                                                */
+        INCLUSAO, ALTERACAO
+         */
         var modoCadastro;
 
         $('#btnjquery').click(function() {
@@ -152,5 +149,5 @@
 </body>
 
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>

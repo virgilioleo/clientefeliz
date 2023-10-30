@@ -6,10 +6,8 @@
 
         <title>Cliente Feliz</title>
 
-        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
         <style>
             html, body {
                 background-color: #17a2b8;
