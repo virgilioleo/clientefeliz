@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label for="remember-me" class="text-info"><span>Remember me</span> <span><input
                                             id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                                <a class="btn btn-info btn-md" value="Entrar" href="/login">Entrar </a>
+                                <a class="btn btn-info btn-md" value="Entrar" href="/clientes">Entrar </a>
                             </div>
                             <div id="register-link" class="text-right">
                                 <a href="#" class="text-info">Register here</a>
