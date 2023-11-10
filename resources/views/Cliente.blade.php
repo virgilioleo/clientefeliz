@@ -37,7 +37,7 @@
             </div>
         </nav>
     </nav>
-    
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -63,7 +63,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar Alterações</button>
+                    <button type="button" class="btn btn-primary">Salvar Alterações
+                    </button>
                 </div>
             </div>
         </div>
@@ -88,35 +89,35 @@
         </tbody>
     </table>
 
-    <script>
+    <!--<script>
         $(document).ready(function() {
             $('#table-clientes').DataTable();
         });
-    </script>
-    
-    <!--<script>
+    </script>-->
+
+    <script>
         /*
-        INCLUSAO, ALTERACAO
-         */
+                INCLUSAO, ALTERACAO
+                 */
         var modoCadastro;
 
         $('#btnjquery').click(function() {
             // alert('Jquery funcionando');
 
-            $.ajax({
-                type: "GET",
-                url: "/clientes/testeajax",
-                success: function(response) {
-                    console.log('Retornou corretamente.');
-                    console.log(response);
-                    console.log(response.nome)
-                    console.log(response.email)
-                },
-                error: function(error) {
-                    console.log('Deu erro.');
-                    console.error(error);
-                }
-            });
+            // $.ajax({
+            //     type: "GET",
+            //     url: "/clientes/testeajax",
+            //     success: function(response) {
+            //         console.log('Retornou corretamente.');
+            //         console.log(response);
+            //         console.log(response.nome)
+            //         console.log(response.email)
+            //     },
+            //     error: function(error) {
+            //         console.log('Deu erro.');
+            //         console.error(error);
+            //     }
+            // });
 
         });
 
@@ -130,6 +131,9 @@
                 columns: [{
                         data: 'nome'
                     },
+                    // {
+                    //     data: 'email'
+                    // }
                     {
                         data: 'acao',
                         sortable: false,
@@ -144,10 +148,13 @@
         });
 
         //
-    </script>-->
+    </script>
 
 </body>
 
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
+
 </html>
