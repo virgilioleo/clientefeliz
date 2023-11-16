@@ -69,8 +69,8 @@
         <table>
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Descrição</th>
+                    <th>Nome</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>

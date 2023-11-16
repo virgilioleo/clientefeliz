@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <title>Cliente Feliz</title>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
                 <a class="navbar-brand" href="#">Clientes</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                    aria-expanded="true " aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,7 +47,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/clientes" method="post">
+                    <form action="/clientes" method="get">
                         @csrf
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -71,29 +72,9 @@
     </div>
 
     <table id="table-clientes" class="display">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>João</td>
-                <td>joao@example.com</td>
-            </tr>
-            <tr>
-                <td>Maria</td>
-                <td>maria@example.com</td>
-            </tr>
-        </tbody>
+       
     </table>
 
-    <!--<script>
-        $(document).ready(function() {
-            $('#table-clientes').DataTable();
-        });
-    </script>-->
 
     <script>
         /*
@@ -102,22 +83,22 @@
         var modoCadastro;
 
         $('#btnjquery').click(function() {
-            // alert('Jquery funcionando');
+            alert('Jquery funcionando');
 
-            // $.ajax({
-            //     type: "GET",
-            //     url: "/clientes/testeajax",
-            //     success: function(response) {
-            //         console.log('Retornou corretamente.');
-            //         console.log(response);
-            //         console.log(response.nome)
-            //         console.log(response.email)
-            //     },
-            //     error: function(error) {
-            //         console.log('Deu erro.');
-            //         console.error(error);
-            //     }
-            // });
+            $.ajax({
+                type: "GET",
+                url: "/clientes/testeajax",
+                success: function(response) {
+                    console.log('Retornou corretamente.');
+                    console.log(response);
+                    console.log(response.nome)
+                    console.log(response.email)
+                },
+                error: function(error) {
+                    console.log('Deu erro.');
+                    console.error(error);
+                }
+            });
 
         });
 
@@ -125,19 +106,20 @@
             $('#table-clientes').DataTable({
                 ajax: {
                     url: "/clientes/buscar",
-                    type: "GET",
+                    type: "get",
                     data: {},
                 },
-                columns: [{
+                columns: [
+                    {
                         data: 'nome'
                     },
-                    // {
-                    //     data: 'email'
-                    // }
+                     {
+                         data: 'email'
+                     },
                     {
                         data: 'acao',
                         sortable: false,
-                        mRender: function(data, type, row) {
+                        Render: function(data, type, row) {
                             return '<button class="btn btn-primary">Editar</button>';
                         }
                     }
@@ -147,7 +129,7 @@
             });
         });
 
-        //
+        
     </script>
 
 </body>

@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         Cliente::create([
             'nome'  => $request->nome,
-            'email' => $request->email
+            'email' => $request->email,
         ]);
 
         return redirect('/clientes');
