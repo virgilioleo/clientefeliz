@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <title>Cliente Feliz</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 </head>
 
 <body>
@@ -18,7 +17,7 @@
                 <a class="navbar-brand" href="#">Clientes</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="true " aria-label="Toggle navigation">
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -43,23 +42,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-5" id="ModalLabel">Novo Cliente</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/clientes" method="get">
+                    <form action="/clientes" method="post">
                         @csrf
                         <div class="mb-3">
                             <label for="campoNome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="campoNome" placeholder="name" name="nome">
+                            <input type="text" class="form-control" id="nome" placeholder="name" name="nome">
                         </div>
                         <div class="mb-3">
                             <label for="campoEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="campoEmail" placeholder="name@example.com"
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com"
                                 name="email">
                         </div>
                         <input type="submit" value="Submit">
                     </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -112,8 +112,15 @@
     </div>
 
     <table id="table-clientes" class="display">
+        
     </table>
-    <!--<button id="btnjquery" class="btn btn-dark">Testando jquery</button>-->
+
+    <!--<script>
+        $(document).ready(function() {
+            $('#table-clientes').DataTable();
+        });
+    </script>-->
+
     <script>
         var modoCadastro;
 
@@ -147,7 +154,7 @@
                 columns: [{
                         data: 'id'
                     },
-                    {    
+                    {
                         data: 'nome'
                     },
                     {
@@ -172,13 +179,13 @@
                 serverSide: false,
                 pageLength: 3,
             });
-            
+
         });
         $('#table-clientes').on('click', '.btn-editar', function() {
-                var id = $(this).data('id');
-                // Implemente a lógica de edição com base no ID clicado
-                editarDados(id);
-            });
+            var id = $(this).data('id');
+            // Implemente a lógica de edição com base no ID clicado
+            editarDados(id);
+        });
 
         function editarDados(id) {
             // Faz uma requisição AJAX para obter os dados do servidor
