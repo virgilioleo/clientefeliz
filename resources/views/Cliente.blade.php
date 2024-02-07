@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -42,11 +42,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Cliente</h1>
+                    <h1 class="modal-title fs-5" id="ModalLabel">Novo Cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/clientes" method="post">
+                    <form action="/clientes" method="get">
                         @csrf
                         <div class="mb-3">
                             <label for="campoNome" class="form-label">Nome</label>
@@ -112,7 +112,7 @@
     </div>
 
     <table id="table-clientes" class="display">
-        
+
     </table>
 
     <!--<script>
@@ -128,7 +128,7 @@
             alert('Jquery funcionando');
 
             $.ajax({
-                type: "GET",
+                type: "get",
                 url: "/clientes/testeajax",
                 success: function(response) {
                     console.log('Retornou corretamente.');
@@ -145,7 +145,9 @@
         });
 
         $(document).ready(function() {
-            $('#table-clientes').DataTable({
+            var tabela = $('#table-clientes').DataTable({
+                "processing": true,
+                "serverSide": true,
                 ajax: {
                     url: "/clientes/buscar",
                     type: "get",
@@ -171,8 +173,8 @@
                     {
                         data: 'acao',
                         sortable: false,
-                        mRender: function(data, type, row) {
-                            return '<button class="btn btn-primary">Excluir</button>';
+                        render: function(data, type, row) {
+                            return '<button class="btn btn-excluir" onclick="excluirCliente">Excluir</button>';
                         }
                     },
                 ],
@@ -190,17 +192,18 @@
         function editarDados(id) {
             // Faz uma requisição AJAX para obter os dados do servidor
             $.ajax({
-                url: "/clientes/buscar",
+                url: "/clientes/buscar/ ",
                 type: "get",
                 datatype: "json",
                 success: function(dados) {
                     // Preenche os campos do modal com os dados obtidos
-                    $('#campoNome').val(dados.nome);
+                    $('#campoNome').val(id);
                     $('#campoEmail').val(dados.email);
-                    console.warn('222');
+                    console.warn(id);
+                    console.warn(nome);
                     console.log('Retornou corretamente.');
                     console.log(dados);
-                    console.log(dados.nome);
+                    console.log(dados.id);
                     console.log(dados.email);
                     // Adicione mais campos conforme necessário
 
@@ -212,6 +215,29 @@
                     console.error('Erro ao obter dados do servidor');
                 }
             });
+        }
+
+        $('#table-clientes').on('click', '.btn-excluir', function() {
+            var id = $(this).data('id');
+            // Implemente a lógica de edição com base no ID clicado
+            excluirDados(id);
+        });
+        function excluirDados(id) {
+            var confirmacao = confirm("Tem certeza de que deseja excluir este cliente?");
+            if (confirmacao) {
+                $.ajax({
+                    url: "/clientes/buscar/" + id,
+                    type: "delete",
+                    success: function() {
+                        // Atualiza a tabela de clientes após a exclusão bem-sucedida
+                        $('#table-clientes').DataTable().ajax.reload();
+                    },
+                    error: function() {
+                        // Lida com erros de requisição
+                        console.error('Erro ao excluir o cliente');
+                    }
+                });
+            }
         }
     </script>
 

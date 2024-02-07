@@ -78,6 +78,7 @@
                 foreach ($model as $item)
                     echo '<tr>
                 <td>' . $item['nome'] . '</td>
+                <td>' . $item['email'] . '</td>
                </tr>';
                 ?>
             </tbody>
